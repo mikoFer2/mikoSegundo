@@ -60,7 +60,7 @@ header nav ul li a:hover
 aside
 {
 	width:25.6%;
-	background:#D1BABA;
+	background:#D9D8D8;
 	float:left;
 	
 }
@@ -82,7 +82,7 @@ footer
 .cajaAgenda
 {
 	position:relative;
-	top:137px; 
+	top:500px; 
 	bottom:0px;
 	right:0px;
 	left:0px;
