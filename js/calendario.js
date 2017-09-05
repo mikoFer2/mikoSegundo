@@ -54,11 +54,26 @@ console.log("Hola");
 /*-----------------------------------------------------------------------------------------------------------*/
 //
 
-    function eventos(month,day,eventText)
+    function eventos(month)
     {
-
+    	switch(parseInt(month))
+        {
+            case 0: return eventosEnero;
+            case 1: return eventosFebrero;
+            case 2: return eventosMarzo;
+            case 3: return eventosAbril;
+            case 4: return eventosMayo;
+            case 5: return eventosJunio;
+            case 6: return eventosJulio;
+            case 7: return eventosAgosto;
+            case 8: return eventosSeptiembre;
+            case 9: return eventosOctubre;
+            case 10: return eventosNoviembre;
+            case 11: return eventosDiciembre;
+        }
     }
-
+/*---------------------------------------------------------------------------------------------------------*/
+//
     function diasDelMes(selectedMonth)
     {
         switch(parseInt(selectedMonth)) 
@@ -77,6 +92,16 @@ console.log("Hola");
             case 11: return diasDiciembre.days;
         }
     }
+/*---------------------------------------------------------------------------------------------------------*/
+//Elimina el contenido del eventText.
+
+    function eliminarContenido(mes,dia)
+    {
+    	if(confirm("Desea eliminar el Evento?"))
+    	{
+    		eventos(mes)[dia] = null;
+    	}
+    }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 //
@@ -84,12 +109,21 @@ console.log("Hola");
     function addEventToDay(month, day) 
     {
         console.log(month + " " + day);
-        var eventText = window.prompt("Ingrese texto del evento: ");
-
+        var eventText;
+            console.log(eventText);
+		if(eventos(month)[day] == null)
+		{
+			eventText = window.prompt("Ingrese texto del evento: ");
+		}
         /* El chequeo de eventText es obligatorio */
+       
         if(eventText) 
         {
-        eventosMayo[day] = eventText;
+       	    eventos(month)[day] = eventText;
+        }
+        else if(eventos(month)[day])
+        {
+            eliminarContenido(month,day);
         }
 
         renderSelectedMonth(month);
@@ -105,11 +139,13 @@ console.log("Hola");
         dayHTML += "onclick=\"addEventToDay(" + month + "," + day + ")\">";
         dayHTML += day;
 
-        if(eventosMayo[day]) {
-        dayHTML += "<hr/>";
-        dayHTML += eventosMayo[day];
-        }
-        
+	        if(eventos(month)[day]) 
+	        
+	        {
+	        dayHTML += "<hr/>";
+	        dayHTML += eventos(month)[day];
+	        }
+	        
         dayHTML += "</td>";
         return dayHTML;
     }
@@ -117,19 +153,9 @@ console.log("Hola");
 /*-----------------------------------------------------------------------------------------------------------*/
 //
     
-    function getHTMLForMonthDay(month, day) {
-        var dayId = day;
-        var dayHTML = "<td id=\"" + dayId + "\" ";
-        dayHTML += "onclick=\"addEventToDay(" + month + "," + day + ")\">";
-        dayHTML += day;
-
-        if(eventosMayo[day]) {
-        dayHTML += "<hr/>";
-        dayHTML += eventosMayo[day];
-        }
-        
-        dayHTML += "</td>";
-        return dayHTML;
+    function funcionVacio(month, day) {
+        var asd = "<td></td>";
+        return asd;
     }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -149,7 +175,7 @@ console.log("Hola");
 
         for (var indice = 0; indice < weekDayIdx; indice++) 
         {
-            newSemanaHTML += getHTMLForMonthDay(selectedMonth, vacio);   
+            newSemanaHTML += funcionVacio(selectedMonth,vacio);   
         }
 
 
