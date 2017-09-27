@@ -1,2 +1,0 @@
-# mikoSegundo
-webapp estática(beta)
